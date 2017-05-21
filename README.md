@@ -1,84 +1,83 @@
-[![Build Status](https://travis-ci.org/zoffixznet/perl6-IO-Dir.svg)](https://travis-ci.org/zoffixznet/perl6-IO-Dir)
+[![Build Status](https://travis-ci.org/zoffixznet/perl6-Benchy.svg)](https://travis-ci.org/zoffixznet/perl6-Benchy)
 
 # NAME
 
-IO::Dir - IO::Path.dir you can close
+Benchy - Benchmark some code
 
 # SYNOPSIS
 
 ```perl6
-    # Won't always suit, since non-exhausted iterator holds on to an open
-    # file descriptor until GC:
-    'foo'.IO.dir[^3].say;
+    use Benchy;
+    b 20_000,  # number of times to loop
+        { some-setup; my-old-code }, # your old version
+        { some-setup; my-new-code }, # your new version
+        { some-setup } # optional "bare" loop to eliminate setup code's time
 
-    # all good; we explicitly close the file descriptor when done
-    .dir[^3].say and .close with IO::Dir.open: 'foo';
+    # SAMPLE OUTPUT:
+    # Bare: 0.0606532677866851s
+    # Old:  2.170558s
+    # New:  0.185170s
+    # NEW version is 11.72x faster
 ```
 
 # DESCRIPTION
 
-[`IO::Path.dir`](https://docs.perl6.org/routine/dir) does the job well for
-most cases, however, there's an edge case where it's no good:
+Takes 2 `Callable`s and measures which one is faster. Optionally takes a 3rd
+`Callable` that will be run the same number of times as other two callables,
+and the time it took to run will be subtracted from the other results.
 
-- You don't exhaust or [eagerly](https://docs.perl6.org/routine/eager)
-    evaluate the `Seq` `dir` returns
-- You do that enough times in some tight loop that
-[GC](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science))
-doesn't get a chance to clean up unreachable `dir` `Seq`s; or
-- You run this on some system with tight open file limits
+# EXPORTED PRAGMAS
 
-If you're in that category, then good news! `IO::Dir` gives you a `dir` whose
-file descriptor you can close without relying on GC or having to [fully
-reify](https://docs.perl6.org/language/glossary#index-entry-Reify)
-the dir's `Seq`.
+## `MONKEY`
 
-# METHODS
+The `use` of this module enables `MONKEY` pragma, so you can augment, use NQP,
+EVAL, etc, without needing to specify those pragmas.
 
-## `.new`
+# EXPORTED SUBROUTINES
 
-Creates a new `IO::Dir` object. Takes no args.
+## `b`
 
-## `.open`
-
-Opens for reading directory given as a positional argument, which can be
-any object that can be coerced to `IO::Path` via `.IO` method. Defaults to
-opening `'.'` directory.
-
-Will first `.close` the invocant if it was previously opened.
+Defined as:
 
 ```perl6
-    $dir1.open;
-    $dir2.open: 'foo';
+    sub b (int $n, &old, &new, &bare = { $ = $ }, :$silent)
 ```
 
-## `.dir`
+Benches the codes and prints the results. Will print in colour, if
+[`Terminal::ANSIColor`](https://modules.perl6.org/repo/Terminal::ANSIColor)
+is installed.
 
-Takes similar arguments as
-[`IO::Path.dir`](https://docs.perl6.org/routine/dir), that have the same
-meaning, returning the same type of `Seq`. Will `.close` the invocant when
-the result is exhausted.
+**Args:**
 
-The additional arguments are boolean `:absolute` and `:Str` that control whether to return absolute paths when dir was opened via an absolute path and whether to
-return paths as `IO::Path` or `Str` objects.
+- `$n` how many times to loop[^1]
+- `&old` your "old" code; assumption is you have "old" code and you're trying
+    to write some "new" code to replace it
+- `&new` your "new" code
+- `&bare` optional (defaults to `{ $ = $ }`). When specified, this `Callable`
+    will be run same number of times as other code and the time it took to
+    run will be subtracted from the `&new` and `&old` times. Use this to
+    run some "setup" code. That is code that's used in `&new` and `&old` but
+    should not be part of the benched times
+- `:$silent` if set to a truthy value, the routine will not print anything to
+    the screen
 
-**Note:** you cannot call `.dir` more than once; re-open the
-invocant or create a new `IO::Dir` if you need that. Will die if called on
-an un-opened `IO::Dir`.
+[1] Note that the exact number to loop will always be evened out,
+    as the bench splits the work into two chunks that are measured at different
+    times, so the total time is `2 × floor ½ × $n`
+
+**Return value:**
+
+Returns a hash with three keys—`bare`, `new`, and `old`—whose values are
+[`Duration`](https://docs.perl6.org/type/Duration) objects representing the
+time it took the corresponding `Callable`s to run. **NOTE:** the `new` and
+`old` already have the duration of `bare` subtracted from them.
 
 ```perl6
-    # Explicit close:
-    .dir[^3].say and .close with IO::Dir.open: 'foo';
-
-    # Implicit close (arrays are mostly-eager, so our Seq is exhausted here)
-    my @files = IO::Dir.open('foo').dir;
-```
-
-## `.close`
-
-Closes an open `IO::Dir`, freeing the file descriptor.
-
-```perl6
-    .dir[^3].say and .close with IO::Dir.open: 'foo';
+    {
+        :bare(Duration.new(<32741983139/488599474770>)),
+        :new(Duration.new(<167/956>)),
+        :old(Duration.new(<1280561957330937733/590077351150947660>))
+    }
 ```
 
 ----
@@ -86,12 +85,12 @@ Closes an open `IO::Dir`, freeing the file descriptor.
 #### REPOSITORY
 
 Fork this module on GitHub:
-https://github.com/zoffixznet/perl6-IO-Dir
+https://github.com/zoffixznet/perl6-Benchy
 
 #### BUGS
 
 To report bugs or request features, please use
-https://github.com/zoffixznet/perl6-IO-Dir/issues
+https://github.com/zoffixznet/perl6-Benchy/issues
 
 #### AUTHOR
 
