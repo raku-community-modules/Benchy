@@ -1,4 +1,4 @@
-use lib <lib /home/zoffix/CPANPRC/Testo/lib>;
+use lib <lib>;
 use Testo;
 
 plan 2;
