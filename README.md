@@ -6,7 +6,7 @@ Benchy - Benchmark some code
 
 # SYNOPSIS
 
-```perl6
+```raku
     use Benchy;
     b 20_000,  # number of times to loop
         { some-setup; my-old-code }, # your old version
@@ -39,12 +39,12 @@ EVAL, etc, without needing to specify those pragmas.
 
 Defined as:
 
-```perl6
+```raku
     sub b (int $n, &old, &new, &bare = { $ = $ }, :$silent)
 ```
 
 Benches the codes and prints the results. Will print in colour, if
-[`Terminal::ANSIColor`](https://modules.perl6.org/repo/Terminal::ANSIColor)
+[`Terminal::ANSIColor`](https://modules.raku.org/repo/Terminal::ANSIColor)
 is installed.
 
 **Args:**
@@ -68,11 +68,11 @@ is installed.
 **Return value:**
 
 Returns a hash with three keys—`bare`, `new`, and `old`—whose values are
-[`Duration`](https://docs.perl6.org/type/Duration) objects representing the
+[`Duration`](https://docs.raku.org/type/Duration) objects representing the
 time it took the corresponding `Callable`s to run. **NOTE:** the `new` and
 `old` already have the duration of `bare` subtracted from them.
 
-```perl6
+```raku
     {
         :bare(Duration.new(<32741983139/488599474770>)),
         :new(Duration.new(<167/956>)),
@@ -85,12 +85,12 @@ time it took the corresponding `Callable`s to run. **NOTE:** the `new` and
 #### REPOSITORY
 
 Fork this module on GitHub:
-https://github.com/zoffixznet/perl6-Benchy
+https://github.com/raku-community-modules/Benchy
 
 #### BUGS
 
 To report bugs or request features, please use
-https://github.com/zoffixznet/perl6-Benchy/issues
+https://github.com/raku-community-modules/Benchy/issues
 
 #### AUTHOR
 
