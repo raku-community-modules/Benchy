@@ -1,18 +1,31 @@
 {
-    "perl"         : "6.c",
-    "name"         : "Benchy",
-    "license"      : "Artistic-2.0",
-    "version"      : "1.001001",
-    "description"  : "Benchmark some code",
-    "tags"         : [ "benchmark", "dev" ],
-    "depends"      : [ ],
-    "test-depends" : [
-        "Testo",
-        "Test::META"
-    ],
-    "provides"     : {
-        "Benchy" : "lib/Benchy.pm6"
-    },
-    "authors"       : ["Zoffix Znet"],
-    "support"       : {"source" : "https://github.com/raku-community-modules/Benchy.git"}
+  "auth": "zef:raku-community-modules",
+  "authors": [
+    "Zoffix Znet"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Benchmark some code",
+  "license": "Artistic-2.0",
+  "name": "Benchy",
+  "perl": "6.c",
+  "provides": {
+    "Benchy": "lib/Benchy.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "https://github.com/raku-community-modules/Benchy.git",
+  "support": {
+    "source": "https://github.com/raku-community-modules/Benchy.git"
+  },
+  "tags": [
+    "benchmark",
+    "dev"
+  ],
+  "test-depends": [
+    "Testo"
+  ],
+  "version": "1.1"
 }

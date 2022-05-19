@@ -1,4 +1,3 @@
-use lib <lib>;
 use Benchy;
 
 augment class IO::Spec::Win32 {
@@ -24,3 +23,5 @@ augment class IO::Spec::Win32 {
 }
 
 dd b 20, { sleep .1 }, { sleep .01 }, { sleep .001 }
+
+# vim: expandtab shiftwidth=4

@@ -1,9 +1,7 @@
-use lib <lib>;
 use Testo;
+use Benchy;
 
 plan 2;
-
-use Benchy;
 
 is-run $*EXECUTABLE,
   :args[|<-Ilib -MBenchy -e>, ｢
@@ -28,3 +26,5 @@ group 'return value' => 4 => {
     is $res<new>, /^ <[\d.]>+ $/, 'new';
     is $res<old>, /^ <[\d.]>+ $/, 'old';
 }
+
+# vim: expandtab shiftwidth=4
