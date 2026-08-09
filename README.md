@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/raku-community-modules/Benchy/actions/workflows/test.yml/badge.svg)](https://github.com/raku-community-modules/Benchy/actions)
+[![Actions Status](https://github.com/raku-community-modules/Benchy/actions/workflows/linux.yml/badge.svg)](https://github.com/raku-community-modules/Benchy/actions) [![Actions Status](https://github.com/raku-community-modules/Benchy/actions/workflows/macos.yml/badge.svg)](https://github.com/raku-community-modules/Benchy/actions) [![Actions Status](https://github.com/raku-community-modules/Benchy/actions/workflows/windowsx.yml/badge.svg)](https://github.com/raku-community-modules/Benchy/actions)
 
 NAME
 ====
@@ -83,12 +83,14 @@ AUTHOR
 
 Zoffix Znet
 
+Source can be located at: https://github.com/raku-community-modules/Benchy . Comments and Pull Requests are welcome.
+
 COPYRIGHT AND LICENSE
 =====================
 
 Copyright 2017 Zoffix Znet
 
-Copyright 2018 - 2022 Raku Community
+Copyright 2018 - 2022, 2026 Raku Community
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 

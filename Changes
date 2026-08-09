@@ -2,7 +2,10 @@ Revision history for Benchy
 
 {{$NEXT}}
     - Enable the MONKEY pragmas through $*LANG, so that the module also
-      works on the RakuAST frontend
+      works on the RakuAST frontend, ugexe++
+    - Tightened up test dependency on Testo
+    - Added full coverage testing
+    - Updated copyright year
 
 1.1  2022-05-19T20:10:21+02:00
     - First version in the zef ecosystem

@@ -10,14 +10,15 @@
   "description": "Benchmark some code",
   "license": "Artistic-2.0",
   "name": "Benchy",
-  "perl": "6.c",
   "provides": {
     "Benchy": "lib/Benchy.rakumod"
   },
+  "raku": "6.c",
   "resources": [
   ],
   "source-url": "https://github.com/raku-community-modules/Benchy.git",
   "support": {
+    "bugtracker": "https://github.com/raku-community-modules/Benchy/issues",
     "source": "https://github.com/raku-community-modules/Benchy.git"
   },
   "tags": [
@@ -25,7 +26,6 @@
     "dev"
   ],
   "test-depends": [
-    "Testo"
   ],
   "version": "1.1"
 }
