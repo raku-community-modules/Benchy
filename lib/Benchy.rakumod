@@ -1,5 +1,7 @@
 sub EXPORT {
-    $*W.do_pragma(Match.new, 'MONKEY', 1, []);
+    $*LANG.set_pragma('MONKEY-GUTS',        1);
+    $*LANG.set_pragma('MONKEY-SEE-NO-EVAL', 1);
+    $*LANG.set_pragma('MONKEY-TYPING',      1);
     Map.new: '&b' => &b
 }
 
