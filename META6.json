@@ -19,6 +19,7 @@
   "source-url": "https://github.com/raku-community-modules/Benchy.git",
   "support": {
     "bugtracker": "https://github.com/raku-community-modules/Benchy/issues",
+    "email": "community@raku.org",
     "source": "https://github.com/raku-community-modules/Benchy.git"
   },
   "tags": [
@@ -26,6 +27,7 @@
     "dev"
   ],
   "test-depends": [
+    "Testo:ver<1.9+>:auth<zef:raku-community-modules>"
   ],
   "version": "1.1"
 }
