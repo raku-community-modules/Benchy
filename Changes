@@ -1,6 +1,8 @@
 Revision history for Benchy
 
 {{$NEXT}}
+
+1.2  2026-08-09T14:22:21+02:00
     - Enable the MONKEY pragmas through $*LANG, so that the module also
       works on the RakuAST frontend, ugexe++
     - Tightened up test dependency on Testo
